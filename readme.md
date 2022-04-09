@@ -11,7 +11,7 @@ Number layer - zero might seem out of place but in fact it is the most used numb
 ![Number](./images/number.png?raw=true "number")
 
 Symbol layer - most of the symbols on the top row are the same as the symbols placed under numbers on full size keyboard. 
-![Symbol](tvsymbol.png?raw=true "symbol")
+![Symbol](./images/symbol.png?raw=true "symbol")
 
 System layer - this is where all function keys and pc related shortcuts are placed.
 ![System](./images/system.png?raw=true "system")
