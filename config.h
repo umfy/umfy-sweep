@@ -16,6 +16,8 @@
 
 #pragma once
 
+#define COMBO_COUNT 4
+
 // General Configs
 #define NO_ACTION_ONESHOT
 #define FORCE_NKRO
