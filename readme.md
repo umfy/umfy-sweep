@@ -4,7 +4,7 @@ Most of the layers have combo assigned to them to lock them temporarily. When I 
 ![Colemak](./images/colemak.png?raw=true "colemak")
 
 Arrow layer can be accessed via LayerTap by holding P. This makes deleting letters and tabulating possible with just one hand.
-Left hand keys on lower row are inherited from the first layer which allows usage of shortcuts like ctrl+C and ctrl+V.
+change ctrl c 
 ![Arrows](./images/arrows.png?raw=true "arrows")
 
 Number layer - zero might seem out of place but in fact it is the most used number so I placed it in the homerow. Brackets [ ] here allow fast typing of array indexes [0]
@@ -17,6 +17,7 @@ System layer - this is where all function keys and pc related shortcuts are plac
 ![System](./images/system.png?raw=true "system")
 
 Mouse layer is kind of symetrical for both hands.
+mb 3 and mb2 update
 ![Mouse](./images/mouse.png?raw=true "mouse")
 
 Firmware layer - mainly for reseting the keyboard or changing to Qwerty

@@ -1,6 +1,18 @@
-/*
-https://github.com/umfy/umfy-sweep
-*/
+/* Copyright 2015-2017 Jack Humbert
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include QMK_KEYBOARD_H
 
@@ -31,6 +43,8 @@ enum ferris_keycodes {
 #define MOUSE TT(_MOUSE)
 #define FMWARE MO(_FMWARE)
 
+#define SFTENTR SFT_T(KC_ENT)
+
 #define RALT_A  RALT_T(KC_A)
 #define RALTSC  RALT_T(KC_SCLN)
 #define RALT_O  RALT_T(KC_O)
@@ -54,6 +68,10 @@ enum ferris_keycodes {
 
 #define CTLRGHT C(KC_RGHT)
 #define CTLLEFT C(KC_LEFT)
+#define CTL_X C(KC_X)
+#define CTL_C C(KC_C)
+#define CTL_D C(KC_D)
+#define CTL_V C(KC_V)
 
 /* COMBOS */
 enum combos {
@@ -118,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ARROWS] = LAYOUT_split_3x5_2(
     KC_ESC, KC_BSPC, KC_DEL,  _______, KC_CAPS, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_BSPC,
     KC_TAB, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_ENT,
-    KC_ENT, _______, _______, _______, _______, KC_INS , CTLLEFT, KC_DOWN, CTLRGHT, KC_ESC,
+    KC_ENT, CTL_X  , CTL_C  , CTL_D  , CTL_V  , KC_INS , CTLLEFT, KC_DOWN, CTLRGHT, KC_ESC,
                                SYSTEM, _______, MOUSE  , _______
 ),
 
@@ -154,16 +172,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* ## Mouse 
 
-| mb2  |  mb1 |  up  | mb3  |wh up |wh up |  mb1 |  up  | mb3  | mb2  |
+| mb3  |  mb1 |  up  | mb2  |wh up |wh up |  mb1 |  up  | mb2  | mb3  |
 |accel | left |down  |right |wh dwn|wh dwn| left |down  |right | accel|
-|      | mb1  |down  | mb3  |      |      | mb1  |down  | mb3  |      |
+| mb3  | wh l |down  |wh r  |      |      | wh l |down  | wh r | mb3  |
                      |fmware| space| \\/  | \\/  |
  */
 
  [_MOUSE] = LAYOUT_split_3x5_2(
-     KC_BTN2, KC_BTN1, KC_MS_U, KC_BTN3, KC_WH_U, KC_WH_U, KC_BTN1, KC_MS_U, KC_BTN3, KC_BTN2,
+     KC_BTN3, KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_U, KC_WH_U, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN3,
      KC_ACL1, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, KC_WH_D, KC_MS_L, KC_MS_D, KC_MS_R, KC_ACL1, 
-     XXXXXXX, KC_BTN1, KC_MS_D, KC_BTN3, XXXXXXX, XXXXXXX, KC_BTN1, KC_MS_D, KC_BTN3, XXXXXXX, 
+     KC_BTN3, KC_WH_L, KC_MS_D, KC_WH_R, XXXXXXX, XXXXXXX, KC_WH_L, KC_MS_D, KC_WH_R, KC_BTN3, 
                                 FMWARE, _______, _______, _______
 ),
 /* ## System
@@ -219,6 +237,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case SFTENTR:
         case RALT_A:
         case RALTSC:
         case RALT_O:
