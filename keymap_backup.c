@@ -65,7 +65,6 @@ enum ferris_keycodes {
 #define CTL__N  CTL_T(KC_N)
 
 #define ARR__P  LT(_ARROWS, KC_P)
-#define ARR__R  LT(_ARROWS, KC_R)
 
 #define CTLRGHT C(KC_RGHT)
 #define CTLLEFT C(KC_LEFT)
@@ -79,28 +78,25 @@ enum combos {
   sys_spc_NORM,
   sym_spc_NORM,
   fmw_spc_NORM,
-  num_spc_NORM,
-  luy_caps
+  num_spc_NORM
 };
 const uint16_t PROGMEM sys_spc_norm_combo[] = {SYSTEM, KC_SPC, COMBO_END};
 const uint16_t PROGMEM sym_spc_norm_combo[] = {SYMBOL, KC_SPC, COMBO_END};  
 const uint16_t PROGMEM fmw_spc_norm_combo[] = {FMWARE, KC_SPC, COMBO_END};  
 const uint16_t PROGMEM num_spc_norm_combo[] = {NUMBER, KC_SPC, COMBO_END};  
-const uint16_t PROGMEM luy_caps_combo[] = {KC_L, KC_U, KC_Y, COMBO_END};  
 
 combo_t key_combos[COMBO_COUNT] = {
   [sys_spc_NORM] = COMBO(sys_spc_norm_combo, NORMAL),
   [sym_spc_NORM] = COMBO(sym_spc_norm_combo, NORMAL),
   [fmw_spc_NORM] = COMBO(fmw_spc_norm_combo, NORMAL),
   [num_spc_NORM] = COMBO(num_spc_norm_combo, NORMAL),
-  [luy_caps] = COMBO(luy_caps_combo, KC_CAPS),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* ## Colemak
 
-|   Q  |   W  |   F  |P(arr)|   B  |   J  |   L  |   U  |   Y  |   BSP|
+|   Q  |   W  |   F  |   P  |   B  |   J  |   L  |   U  |   Y  |   BSP|
 |RA(A) | A(R) | S(S) | C(T) | G(G) | G(M) | C(N) | S(E) | A(I) |RA(O) |
 |   Z  |   X  |  C   |   D  |   V  |   K  |   H  |   ,  |   .  |   /  |
                      |Symbol|Space |Number|Arrows|
@@ -115,14 +111,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* ## Qwerty
 
-|   Q  |   W  |   E  |R(arr)|   T  |   Y  |   U  |   I  |   O  |   P  |
+|   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  |
 |RA(A) | A(S) | S(D) | C(F) | G(G) | G(H) | C(J) | S(K) | A(L) |RA(;) |
 |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |
                      |Symbol|Space |Number|Arrows|
  */
 
 [_QWERTY] = LAYOUT_split_3x5_2(
-    KC_Q,    KC_W,    KC_E,   ARR__R, KC_T,    KC_Y,    KC_U,   KC_I,    KC_O,    KC_P,  
+    KC_Q,    KC_W,    KC_E,   KC_R,   KC_T,    KC_Y,    KC_U,   KC_I,    KC_O,    KC_P,  
     RALT_A,  ALT__S,  SFT__D, CTL__F, GUI__G,  GUI__H,  CTL__J, SFT__K,  ALT__L,  RALTSC, 
     KC_Z,    KC_X,    KC_C,   KC_V,   KC_B,    KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, 
                                SYMBOL, KC_SPC, NUMBER, ARROWS
@@ -153,9 +149,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_SYMBOL] = LAYOUT_split_3x5_2(
-     KC_EXLM, KC_LPRN, KC_RPRN, KC_PIPE, KC_PERC, KC_ASTR, KC_AMPR, KC_LCBR, KC_RCBR, KC_BSPC,  
-     KC_DLR,  KC_UNDS, KC_PMNS, KC_EQL , KC_BSLS, KC_PPLS, KC_COLN, KC_QUOT, KC_DQUO, KC_GRV , 
-     KC_AT  , KC_LBRC, KC_RBRC, KC_HASH, KC_SLSH, KC_SLSH, KC_SCLN, KC_LT,   KC_GT  , KC_QUES, 
+     KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_LPRN, KC_RPRN, KC_BSPC,  
+     KC_GRV,  KC_QUOT, KC_DQUO, KC_COLN, KC_PIPE, KC_ASTR, KC_EQL,  KC_LCBR, KC_RCBR, KC_PPLS, 
+     KC_UNDS, KC_LBRC, KC_RBRC, KC_SCLN, KC_BSLS, KC_SLSH, KC_PMNS, KC_LT,   KC_GT  , KC_QUES, 
                                 _______, _______, _______, SYSTEM
 ),
 
@@ -168,9 +164,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_NUMBER] = LAYOUT_split_3x5_2(
-     KC_ESC , KC_LPRN, KC_RPRN ,KC_CIRC, XXXXXXX, KC_ASTR, KC_7   , KC_8   , KC_9   , KC_BSPC,  
-     KC_PERC, KC_COMM, KC_DOT , KC_EQL , KC_TILD, KC_PPLS, KC_4   , KC_5   , KC_6   , KC_PMNS, 
-     KC_ENT , KC_LBRC, KC_RBRC, KC_0   , XXXXXXX, KC_0   , KC_1   , KC_2   , KC_3   , KC_SLSH, 
+     KC_TILD, KC_LPRN, KC_RPRN ,KC_CIRC, KC_PERC, KC_0   , KC_7   , KC_8   , KC_9   , KC_BSPC,  
+     KC_PPLS, KC_COMM, KC_DOT ,  KC_0  , KC_ASTR, KC_ASTR, KC_4   , KC_5   , KC_6   , KC_PPLS, 
+     KC_PMNS, KC_LBRC, KC_RBRC, KC_EQL , KC_SLSH, KC_SLSH, KC_1   , KC_2   , KC_3   , KC_PMNS, 
                                 _______, _______, _______, MOUSE 
 ),
 
@@ -190,21 +186,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* ## System
 
-|      |P_Trac| Play |N_Trac|      |      |  F7  |  F8  |  F9  | F10  |
-|Pr_Scn| Alt  | Shift| Ctrl | Gui  | Rgui |  F4  |  F5  |  F6  | F11  |
-|mute  | vol- | vol+ | bti- | bri+ |      |  F1  |  F2  |  F3  | F12  |
+|  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  | F10  |
+|Pr_Scn| Alt  | Shift| Ctrl | Gui  | gui  |rctrl |rshft |lalt  | F11  |
+|mute  | vol- | vol+ | bti- | bri+ |      |P_Trac| Play |N_Trac| F12  |
                      | \\/  |      |      |  \\/ |
  */
  
 
 
 [_SYSTEM] = LAYOUT_split_3x5_2(
-    XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX, KC_F7,  KC_F8,  KC_F9,  KC_F10,
-    KC_PSCR, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, KC_RGUI, KC_F4,  KC_F5,  KC_F6,  KC_F11,
-    KC_MUTE, KC_VOLD, KC_VOLU, KC_BRID, KC_BRIU, XXXXXXX, KC_F1,  KC_F2,  KC_F3,  KC_F12,
+    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,
+    KC_PSCR, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, KC_RGUI, KC_RCTL, KC_RSFT, KC_LALT, KC_F11,
+    KC_MUTE, KC_VOLD, KC_VOLU, KC_BRID, KC_BRIU, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, KC_F12,
                                 _______, _______, FMWARE, _______
 ),
-
 
 /* ## FMWare
 

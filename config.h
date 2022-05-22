@@ -16,7 +16,7 @@
 
 #pragma once
 
-#define COMBO_COUNT 4
+#define COMBO_COUNT 5
 
 // General Configs
 #define NO_ACTION_ONESHOT
