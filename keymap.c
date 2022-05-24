@@ -18,8 +18,8 @@
 
 
 enum ferris_layers {
-  _QWERTY,
   _COLEMAK,
+  _QWERTY,
   _NUMBER,
   _ARROWS,
   _SYMBOL,
@@ -29,8 +29,8 @@ enum ferris_layers {
 };
 
 enum ferris_keycodes {
-  QWERTY = SAFE_RANGE,
-  COLEMAK,
+  COLEMAK = SAFE_RANGE,
+  QWERTY,
   NORMAL
 };
 
@@ -43,15 +43,13 @@ enum ferris_keycodes {
 #define MOUSE TT(_MOUSE)
 #define FMWARE MO(_FMWARE)
 
-#define SFTENTR SFT_T(KC_ENT)
-
-#define RALT_A  RALT_T(KC_A)
-#define RALTSC  RALT_T(KC_SCLN)
-#define RALT_O  RALT_T(KC_O)
-#define ALT__S  ALT_T(KC_S)
-#define ALT__L  ALT_T(KC_L)
-#define ALT__R  ALT_T(KC_R)
-#define ALT__I  ALT_T(KC_I)
+#define RALT_R  RALT_T(KC_R)
+#define RALT_I  RALT_T(KC_I)
+#define RALT_S  ALT_T(KC_S)
+#define RALT_L  RALT_T(KC_L)
+#define ALT__A  ALT_T(KC_A)
+#define ALT__O  ALT_T(KC_O)
+#define ALT_SC  ALT_T(KC_SCLN)
 #define GUI__G  GUI_T(KC_G)
 #define GUI__H  GUI_T(KC_H)
 #define GUI__M  GUI_T(KC_M)
@@ -66,6 +64,7 @@ enum ferris_keycodes {
 
 #define ARR__P  LT(_ARROWS, KC_P)
 #define ARR__R  LT(_ARROWS, KC_R)
+#define SYS_O  LT(_SYSTEM, KC_0)
 
 #define CTLRGHT C(KC_RGHT)
 #define CTLLEFT C(KC_LEFT)
@@ -76,24 +75,27 @@ enum ferris_keycodes {
 
 /* COMBOS */
 enum combos {
-  sys_spc_NORM,
-  sym_spc_NORM,
-  fmw_spc_NORM,
-  num_spc_NORM,
-  luy_caps
+  arrows_NORM,
+  symbol_NORM,
+  number_NORM,
+  wfp_esc,
+  luy_caps,
+  hcd_enter
 };
-const uint16_t PROGMEM sys_spc_norm_combo[] = {SYSTEM, KC_SPC, COMBO_END};
-const uint16_t PROGMEM sym_spc_norm_combo[] = {SYMBOL, KC_SPC, COMBO_END};  
-const uint16_t PROGMEM fmw_spc_norm_combo[] = {FMWARE, KC_SPC, COMBO_END};  
-const uint16_t PROGMEM num_spc_norm_combo[] = {NUMBER, KC_SPC, COMBO_END};  
+const uint16_t PROGMEM arrows_norm_combo[] = {MOUSE,  KC_SPC, COMBO_END};
+const uint16_t PROGMEM symbol_norm_combo[] = {SYSTEM, KC_SPC, COMBO_END};  
+const uint16_t PROGMEM number_norm_combo[] = {MOUSE, SYS_O, COMBO_END};  
+const uint16_t PROGMEM wfp_esc_combo[] = {KC_W, KC_F, ARR__P, COMBO_END};  
 const uint16_t PROGMEM luy_caps_combo[] = {KC_L, KC_U, KC_Y, COMBO_END};  
+const uint16_t PROGMEM hcd_enter_combo[] = {KC_H, KC_COMM, KC_DOT, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
-  [sys_spc_NORM] = COMBO(sys_spc_norm_combo, NORMAL),
-  [sym_spc_NORM] = COMBO(sym_spc_norm_combo, NORMAL),
-  [fmw_spc_NORM] = COMBO(fmw_spc_norm_combo, NORMAL),
-  [num_spc_NORM] = COMBO(num_spc_norm_combo, NORMAL),
+  [arrows_NORM] = COMBO(arrows_norm_combo, NORMAL),
+  [symbol_NORM] = COMBO(symbol_norm_combo, NORMAL),
+  [number_NORM] = COMBO(number_norm_combo, NORMAL),  
+  [wfp_esc] = COMBO(wfp_esc_combo, KC_ESC),
   [luy_caps] = COMBO(luy_caps_combo, KC_CAPS),
+  [hcd_enter] = COMBO(hcd_enter_combo, KC_ENT),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -108,9 +110,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_COLEMAK] = LAYOUT_split_3x5_2(
     KC_Q,    KC_W,    KC_F,   ARR__P, KC_B,    KC_J,    KC_L,   KC_U,    KC_Y,    KC_BSPC,
-    RALT_A,  ALT__R,  SFT__S, CTL__T, GUI__G,  GUI__M,  CTL__N, SFT__E,  ALT__I,  RALT_O,
+    ALT__A,  RALT_R,  SFT__S, CTL__T, GUI__G,  GUI__M,  CTL__N, SFT__E,  RALT_I,  ALT__O,
     KC_Z,    KC_X,    KC_C,   KC_D,   KC_V,    KC_K,    KC_H,   KC_COMM, KC_DOT,  KC_SLSH, 
-                              SYMBOL, KC_SPC,  NUMBER,  ARROWS
+                              NUMBER, KC_SPC, ARROWS, SYMBOL
 ),
 
 /* ## Qwerty
@@ -123,9 +125,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_QWERTY] = LAYOUT_split_3x5_2(
     KC_Q,    KC_W,    KC_E,   ARR__R, KC_T,    KC_Y,    KC_U,   KC_I,    KC_O,    KC_P,  
-    RALT_A,  ALT__S,  SFT__D, CTL__F, GUI__G,  GUI__H,  CTL__J, SFT__K,  ALT__L,  RALTSC, 
+    ALT__A,  RALT_S,  SFT__D, CTL__F, GUI__G,  GUI__H,  CTL__J, SFT__K,  RALT_L,  ALT_SC, 
     KC_Z,    KC_X,    KC_C,   KC_V,   KC_B,    KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, 
-                               SYMBOL, KC_SPC, NUMBER, ARROWS
+                                NUMBER, KC_SPC, ARROWS, SYMBOL
 ),
 
 
@@ -141,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC, KC_BSPC, KC_DEL,  KC_DEL , KC_CAPS, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_BSPC,
     KC_TAB, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_ENT,
     KC_ENT, CTL_X  , CTL_C  , CTL_D  , CTL_V  , KC_INS , CTLLEFT, KC_DOWN, CTLRGHT, KC_ESC,
-                               SYSTEM, _______, MOUSE  , _______
+                               MOUSE, _______, _______, _______
 ),
 
 /* ## Symbol
@@ -153,10 +155,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_SYMBOL] = LAYOUT_split_3x5_2(
-     KC_EXLM, KC_LPRN, KC_RPRN, KC_PIPE, KC_PERC, KC_ASTR, KC_AMPR, KC_LCBR, KC_RCBR, KC_BSPC,  
+     KC_EXLM, KC_LPRN, KC_RPRN, KC_PIPE, KC_PERC, KC_TILD, KC_AMPR, KC_LCBR, KC_RCBR, KC_BSPC,  
      KC_DLR,  KC_UNDS, KC_PMNS, KC_EQL , KC_BSLS, KC_PPLS, KC_COLN, KC_QUOT, KC_DQUO, KC_GRV , 
-     KC_AT  , KC_LBRC, KC_RBRC, KC_HASH, KC_SLSH, KC_SLSH, KC_SCLN, KC_LT,   KC_GT  , KC_QUES, 
-                                _______, _______, _______, SYSTEM
+     KC_AT  , KC_LBRC, KC_RBRC, KC_HASH, KC_SLSH, KC_ASTR, KC_SCLN, KC_LT,   KC_GT  , KC_QUES, 
+                                SYSTEM, _______, _______, _______
 ),
 
 /* ## Number
@@ -168,10 +170,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_NUMBER] = LAYOUT_split_3x5_2(
-     KC_ESC , KC_LPRN, KC_RPRN ,KC_CIRC, XXXXXXX, KC_ASTR, KC_7   , KC_8   , KC_9   , KC_BSPC,  
+     KC_ESC , KC_LPRN, KC_RPRN ,KC_CIRC, XXXXXXX, XXXXXXX, KC_7   , KC_8   , KC_9   , KC_BSPC,  
      KC_PERC, KC_COMM, KC_DOT , KC_EQL , KC_TILD, KC_PPLS, KC_4   , KC_5   , KC_6   , KC_PMNS, 
-     KC_ENT , KC_LBRC, KC_RBRC, KC_0   , XXXXXXX, KC_0   , KC_1   , KC_2   , KC_3   , KC_SLSH, 
-                                _______, _______, _______, MOUSE 
+     KC_ENT , KC_LBRC, KC_RBRC, KC_0   , XXXXXXX, KC_ASTR, KC_1   , KC_2   , KC_3   , KC_SLSH, 
+                                _______, _______, MOUSE, SYS_O
 ),
 
 /* ## Mouse 
@@ -186,7 +188,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_BTN3, KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_U, KC_WH_U, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN3,
      KC_ACL1, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, KC_WH_D, KC_MS_L, KC_MS_D, KC_MS_R, KC_ACL1, 
      KC_BTN3, KC_WH_L, KC_MS_D, KC_WH_R, XXXXXXX, XXXXXXX, KC_WH_L, KC_MS_D, KC_WH_R, KC_BTN3, 
-                                FMWARE, _______, _______, _______
+                                _______, NORMAL, _______, FMWARE
 ),
 /* ## System
 
@@ -200,9 +202,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_SYSTEM] = LAYOUT_split_3x5_2(
     XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX, KC_F7,  KC_F8,  KC_F9,  KC_F10,
-    KC_PSCR, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, KC_RGUI, KC_F4,  KC_F5,  KC_F6,  KC_F11,
+    KC_PSCR, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, XXXXXXX, KC_F4,  KC_F5,  KC_F6,  KC_F11,
     KC_MUTE, KC_VOLD, KC_VOLU, KC_BRID, KC_BRIU, XXXXXXX, KC_F1,  KC_F2,  KC_F3,  KC_F12,
-                                _______, _______, FMWARE, _______
+                                _______, NORMAL, FMWARE, _______
 ),
 
 
@@ -216,7 +218,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_FMWARE] = LAYOUT_split_3x5_2(
      RESET,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-     EEP_RST, XXXXXXX, QWERTY , COLEMAK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
+     EEP_RST, XXXXXXX, QWERTY , COLEMAK, XXXXXXX, KC_RGUI, KC_RCTL, KC_RSFT, KC_RALT, XXXXXXX, 
      DEBUG,   XXXXXXX, XXXXXXX, CMB_OFF, CMB_ON , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
                                 XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 )
@@ -225,12 +227,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case QWERTY:
-            set_single_persistent_default_layer(_QWERTY);
-            return true;
-
         case COLEMAK:
             set_single_persistent_default_layer(_COLEMAK);
+            return true;
+
+        case QWERTY:
+            set_single_persistent_default_layer(_QWERTY);
             return true;
 
         case NORMAL:
@@ -242,14 +244,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case SFTENTR:
-        case RALT_A:
-        case RALTSC:
-        case RALT_O:
-        case ALT__S:
-        case ALT__L:
-        case ALT__R:
-        case ALT__I:
+        case RALT_R:
+        case RALT_I:
+        case RALT_S:
+        case RALT_L:
+        case ALT__A:
+        case ALT__O:
+        case ALT_SC:
         case GUI__G:
         case GUI__H:
         case GUI__M:
@@ -262,6 +263,8 @@ bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
         case CTL__T:
         case CTL__N:
         case ARR__P:
+        case ARR__R:
+        case SYS_O:
             return true;
         default:
             return false;
@@ -270,13 +273,13 @@ bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
 
 bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case RALT_A:
-        case RALTSC:
-        case RALT_O:
-        case ALT__S:
-        case ALT__L:
-        case ALT__R:
-        case ALT__I:
+        case RALT_R:
+        case RALT_I:
+        case RALT_S:
+        case RALT_L:
+        case ALT__A:
+        case ALT__O:
+        case ALT_SC:
         case GUI__G:
         case GUI__H:
         case GUI__M:
@@ -289,6 +292,8 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
         case CTL__T:
         case CTL__N:
         case ARR__P:
+        case ARR__R:
+        case SYS_O:
             return true;
         default:
             return false;

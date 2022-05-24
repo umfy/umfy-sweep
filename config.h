@@ -16,7 +16,7 @@
 
 #pragma once
 
-#define COMBO_COUNT 5
+#define COMBO_COUNT 6
 
 // General Configs
 #define NO_ACTION_ONESHOT
@@ -33,7 +33,7 @@
 #define MK_W_INTERVAL_UNMOD 80
 
 // Tap-Hold Configs
-#define TAPPING_TERM 200
+#define TAPPING_TERM 230
 #define PERMISSIVE_HOLD
 #define IGNORE_MOD_TAP_INTERRUPT
 #define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
