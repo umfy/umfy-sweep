@@ -63,7 +63,7 @@ enum ferris_keycodes {
 #define CTL__N  CTL_T(KC_N)
 
 #define ARRSPC  LT(_ARROWS, KC_SPC)
-#define SYS_O  LT(_SYSTEM, KC_0)
+#define SYSSPC  LT(_SYSTEM, KC_SPC)
 
 #define CTLRGHT C(KC_RGHT)
 #define CTLLEFT C(KC_LEFT)
@@ -76,24 +76,16 @@ enum ferris_keycodes {
 
 /* COMBOS */
 enum combos {
-  arrows_NORM,
-  symbol_NORM,
-  number_NORM,
   wfp_esc,
   luy_caps,
   hcd_enter
 };
-const uint16_t PROGMEM arrows_norm_combo[] = {MOUSE,  KC_SPC, COMBO_END};
-const uint16_t PROGMEM symbol_norm_combo[] = {SYSTEM, KC_SPC, COMBO_END};  
-const uint16_t PROGMEM number_norm_combo[] = {MOUSE, SYS_O, COMBO_END};  
+
 const uint16_t PROGMEM wfp_esc_combo[] = {KC_W, KC_F, KC_P, COMBO_END};  
 const uint16_t PROGMEM luy_caps_combo[] = {KC_L, KC_U, KC_Y, COMBO_END};  
 const uint16_t PROGMEM hcd_enter_combo[] = {KC_H, KC_COMM, KC_DOT, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
-  [arrows_NORM] = COMBO(arrows_norm_combo, NORMAL),
-  [symbol_NORM] = COMBO(symbol_norm_combo, NORMAL),
-  [number_NORM] = COMBO(number_norm_combo, NORMAL),  
   [wfp_esc] = COMBO(wfp_esc_combo, KC_ESC),
   [luy_caps] = COMBO(luy_caps_combo, KC_CAPS),
   [hcd_enter] = COMBO(hcd_enter_combo, KC_ENT),
@@ -144,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC, KC_DEL,  KC_BSPC,  CTL_Z , CTL_Y  , KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_BSPC,
     KC_TAB, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_ENT,
     KC_ENT, CTL_X  , CTL_C  , CTL_D  , CTL_V  , KC_INS , CTLLEFT, KC_DOWN, CTLRGHT, KC_ESC,
-                               MOUSE, _______, _______, NUMBER
+                              MOUSE  , KC_SPC , NORMAL , NUMBER
 ),
 
 /* ## Symbol
@@ -159,7 +151,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_EXLM, KC_LPRN, KC_RPRN, KC_PIPE, KC_PERC, KC_GRV , KC_AMPR, KC_LCBR, KC_RCBR, KC_BSPC,  
      KC_DLR,  KC_UNDS, KC_PMNS, KC_EQL , KC_BSLS, KC_PPLS, KC_COLN, KC_QUOT, KC_DQUO, KC_ENT , 
      KC_AT  , KC_LBRC, KC_RBRC, KC_HASH, KC_SLSH, KC_ASTR, KC_SCLN, KC_LT,   KC_GT  , KC_QUES, 
-                                SYSTEM, _______, NUMBER, _______
+                                SYSTEM,  KC_SPC , NUMBER, NORMAL
 ),
 
 /* ## Number
@@ -174,7 +166,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_ESC , KC_LPRN, KC_RPRN ,KC_CIRC, XXXXXXX, KC_0   , KC_7   , KC_8   , KC_9   , KC_BSPC,  
      KC_PERC, KC_COMM, KC_DOT , KC_EQL , KC_TILD, KC_PPLS, KC_4   , KC_5   , KC_6   , KC_PMNS, 
      KC_ENT , KC_LBRC, KC_RBRC, KC_0   , XXXXXXX, KC_ASTR, KC_1   , KC_2   , KC_3   , KC_SLSH, 
-                                 FMWARE, _______, MOUSE, SYS_O
+                                 NORMAL, KC_SPC , KC_0   , SYSSPC
 ),
 
 /* ## Mouse 
@@ -189,7 +181,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_BTN3, KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_U, KC_WH_U, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN3,
      KC_ACL1, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, KC_WH_D, KC_MS_L, KC_MS_D, KC_MS_R, KC_ACL1, 
      KC_BTN3, KC_WH_L, KC_MS_D, KC_WH_R, XXXXXXX, XXXXXXX, KC_WH_L, KC_MS_D, KC_WH_R, KC_BTN3, 
-                                _______, NORMAL, _______, FMWARE
+                                 NORMAL, KC_SPC, NORMAL, FMWARE
 ),
 /* ## System
 
@@ -205,7 +197,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX, KC_F7,  KC_F8,  KC_F9,  KC_F10,
     KC_PSCR, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, XXXXXXX, KC_F4,  KC_F5,  KC_F6,  KC_F11,
     KC_MUTE, KC_VOLD, KC_VOLU, KC_BRID, KC_BRIU, XXXXXXX, KC_F1,  KC_F2,  KC_F3,  KC_F12,
-                                _______, NORMAL, FMWARE, _______
+                                NORMAL, KC_SPC , FMWARE, NORMAL
 ),
 
 
