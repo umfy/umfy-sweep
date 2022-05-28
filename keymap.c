@@ -20,9 +20,9 @@
 enum ferris_layers {
   _COLEMAK,
   _QWERTY,
-  _NUMBER,
   _ARROWS,
   _SYMBOL,
+  _NUMBER,
   _SYSTEM,
   _MOUSE,
   _FMWARE
@@ -62,12 +62,13 @@ enum ferris_keycodes {
 #define CTL__T  CTL_T(KC_T)
 #define CTL__N  CTL_T(KC_N)
 
-#define ARR__P  LT(_ARROWS, KC_P)
-#define ARR__R  LT(_ARROWS, KC_R)
+#define ARRSPC  LT(_ARROWS, KC_SPC)
 #define SYS_O  LT(_SYSTEM, KC_0)
 
 #define CTLRGHT C(KC_RGHT)
 #define CTLLEFT C(KC_LEFT)
+#define CTL_Z C(KC_Z)
+#define CTL_Y C(KC_Y)
 #define CTL_X C(KC_X)
 #define CTL_C C(KC_C)
 #define CTL_D C(KC_D)
@@ -85,7 +86,7 @@ enum combos {
 const uint16_t PROGMEM arrows_norm_combo[] = {MOUSE,  KC_SPC, COMBO_END};
 const uint16_t PROGMEM symbol_norm_combo[] = {SYSTEM, KC_SPC, COMBO_END};  
 const uint16_t PROGMEM number_norm_combo[] = {MOUSE, SYS_O, COMBO_END};  
-const uint16_t PROGMEM wfp_esc_combo[] = {KC_W, KC_F, ARR__P, COMBO_END};  
+const uint16_t PROGMEM wfp_esc_combo[] = {KC_W, KC_F, KC_P, COMBO_END};  
 const uint16_t PROGMEM luy_caps_combo[] = {KC_L, KC_U, KC_Y, COMBO_END};  
 const uint16_t PROGMEM hcd_enter_combo[] = {KC_H, KC_COMM, KC_DOT, COMBO_END};
 
@@ -109,10 +110,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_COLEMAK] = LAYOUT_split_3x5_2(
-    KC_Q,    KC_W,    KC_F,   ARR__P, KC_B,    KC_J,    KC_L,   KC_U,    KC_Y,    KC_BSPC,
+    KC_Q,    KC_W,    KC_F,   KC_P  , KC_B,    KC_J,    KC_L,   KC_U,    KC_Y,    KC_BSPC,
     ALT__A,  RALT_R,  SFT__S, CTL__T, GUI__G,  GUI__M,  CTL__N, SFT__E,  RALT_I,  ALT__O,
     KC_Z,    KC_X,    KC_C,   KC_D,   KC_V,    KC_K,    KC_H,   KC_COMM, KC_DOT,  KC_SLSH, 
-                              NUMBER, KC_SPC, ARROWS, SYMBOL
+                              NUMBER, ARRSPC, ARROWS, SYMBOL
 ),
 
 /* ## Qwerty
@@ -124,10 +125,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_QWERTY] = LAYOUT_split_3x5_2(
-    KC_Q,    KC_W,    KC_E,   ARR__R, KC_T,    KC_Y,    KC_U,   KC_I,    KC_O,    KC_P,  
+    KC_Q,    KC_W,    KC_E,   KC_R  , KC_T,    KC_Y,    KC_U,   KC_I,    KC_O,    KC_P,  
     ALT__A,  RALT_S,  SFT__D, CTL__F, GUI__G,  GUI__H,  CTL__J, SFT__K,  RALT_L,  ALT_SC, 
     KC_Z,    KC_X,    KC_C,   KC_V,   KC_B,    KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, 
-                                NUMBER, KC_SPC, ARROWS, SYMBOL
+                                NUMBER, ARRSPC, ARROWS, SYMBOL
 ),
 
 
@@ -140,10 +141,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_ARROWS] = LAYOUT_split_3x5_2(
-    KC_ESC, KC_BSPC, KC_DEL,  KC_DEL , KC_CAPS, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_BSPC,
+    KC_ESC, KC_DEL,  KC_BSPC,  CTL_Z , CTL_Y  , KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_BSPC,
     KC_TAB, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_ENT,
     KC_ENT, CTL_X  , CTL_C  , CTL_D  , CTL_V  , KC_INS , CTLLEFT, KC_DOWN, CTLRGHT, KC_ESC,
-                               MOUSE, _______, _______, _______
+                               MOUSE, _______, _______, NUMBER
 ),
 
 /* ## Symbol
@@ -155,10 +156,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_SYMBOL] = LAYOUT_split_3x5_2(
-     KC_EXLM, KC_LPRN, KC_RPRN, KC_PIPE, KC_PERC, KC_TILD, KC_AMPR, KC_LCBR, KC_RCBR, KC_BSPC,  
-     KC_DLR,  KC_UNDS, KC_PMNS, KC_EQL , KC_BSLS, KC_PPLS, KC_COLN, KC_QUOT, KC_DQUO, KC_GRV , 
+     KC_EXLM, KC_LPRN, KC_RPRN, KC_PIPE, KC_PERC, KC_GRV , KC_AMPR, KC_LCBR, KC_RCBR, KC_BSPC,  
+     KC_DLR,  KC_UNDS, KC_PMNS, KC_EQL , KC_BSLS, KC_PPLS, KC_COLN, KC_QUOT, KC_DQUO, KC_ENT , 
      KC_AT  , KC_LBRC, KC_RBRC, KC_HASH, KC_SLSH, KC_ASTR, KC_SCLN, KC_LT,   KC_GT  , KC_QUES, 
-                                SYSTEM, _______, _______, _______
+                                SYSTEM, _______, NUMBER, _______
 ),
 
 /* ## Number
@@ -170,10 +171,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_NUMBER] = LAYOUT_split_3x5_2(
-     KC_ESC , KC_LPRN, KC_RPRN ,KC_CIRC, XXXXXXX, XXXXXXX, KC_7   , KC_8   , KC_9   , KC_BSPC,  
+     KC_ESC , KC_LPRN, KC_RPRN ,KC_CIRC, XXXXXXX, KC_0   , KC_7   , KC_8   , KC_9   , KC_BSPC,  
      KC_PERC, KC_COMM, KC_DOT , KC_EQL , KC_TILD, KC_PPLS, KC_4   , KC_5   , KC_6   , KC_PMNS, 
      KC_ENT , KC_LBRC, KC_RBRC, KC_0   , XXXXXXX, KC_ASTR, KC_1   , KC_2   , KC_3   , KC_SLSH, 
-                                _______, _______, MOUSE, SYS_O
+                                 FMWARE, _______, MOUSE, SYS_O
 ),
 
 /* ## Mouse 
@@ -262,9 +263,6 @@ bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
         case CTL__J:
         case CTL__T:
         case CTL__N:
-        case ARR__P:
-        case ARR__R:
-        case SYS_O:
             return true;
         default:
             return false;
@@ -291,9 +289,6 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
         case CTL__J:
         case CTL__T:
         case CTL__N:
-        case ARR__P:
-        case ARR__R:
-        case SYS_O:
             return true;
         default:
             return false;
