@@ -13,7 +13,7 @@ Symbol layer is designed to have the most used symbols in programming in the mos
 ![Symbol](./images/symbol.png?raw=true "symbol")
 
 ## Layer 3 - number
-Brackets and = sign are the same as in the symbol layer. $ and % are swapped because i barely use $. The most used symbols paired with numbers are there.
+Brackets and = sign are the same as in the symbol layer. Dollar and Percent are swapped because i barely use dollar sign. The most used symbols paired with numbers are there.
 It can be accesed comfortably by left hand thumb and also optionally by pressing both right-hand thumb keys to allow one handed usage from time to time. 
 ![Number](./images/number.png?raw=true "number")
 
